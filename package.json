@@ -1,0 +1,39 @@
+{
+  "name": "babococo",
+  "version": "1.0.0",
+  "type": "app",
+  "dependencies": {
+    "appcache-nanny": "0.0.6",
+    "hoodie-plugin-appcache": "^0.1.3",
+    "hoodie-plugin-appconfig": "^2.0.1",
+    "hoodie-plugin-backbone": "^1.0.2",
+    "hoodie-plugin-email": "^1.0.0",
+    "hoodie-plugin-users": "^2.1.0",
+    "hoodie-server": "^2.0.0"
+  },
+  "files": [
+    "www/"
+  ],
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "scripts": {
+    "start": "node node_modules/hoodie-server/bin/start"
+  },
+  "hoodie": {
+    "plugins": [
+      "hoodie-plugin-appconfig",
+      "hoodie-plugin-email",
+      "hoodie-plugin-users",
+      "hoodie-plugin-appcache",
+      "hoodie-plugin-backbone"
+    ]
+  },
+  "readme": "# Creating a new Hoodie App\n\n## Installation\n\nPlease refer to the [install guides for OS X, Linux and Windows](http://hood.ie/#installation).\n\n## Plugins\n\nTo install a specific plugin, run (in your app's directory):\n\n    $ hoodie install <name>\n\nwhere `<name>` is one of the Hoodie Plugin.\n\nTo uninstall use:\n\n    $ hoodie uninstall <name>\n\n### List of Hoodie Plugins\n\n* users (installed by default)\n  - user sign up\n  - user sign in\n  - password forget\n  - change username\n  - change password\n\n* email (installed by default)\n  - send multipart emails\n\n\n## Troubleshooting\n\nIn case you get npm permission errors, this is most likely down to the\nfact that you have prior used the 'sudo' command to install node\nmodules.\n\n`sudo -H npm yourCommand` should fix this. For slightly more detail,\nplease check out: [Why you shouldn't use sudo with npm](http://blog.hood.ie/2014/02/why-you-shouldnt-use-sudo-with-npm/)\n\nMake sure that local-tld got installed correctly\n\n    $ NODE_PATH=`npm root -g`\n    $ open $NODE_PATH/local-tld\n\nMake sure that paths have been set correctly\n\n    $ echo $NODE_PATH\n    $ cat ~/Library/LaunchAgents/ie.hood.local-tld-service.plist\n\nIn some situations, you may need to manually update `~/Library/LaunchAgents/ie.hood.local-tld-service.plist` to correctly source your Node installation, particularly if you are using a Node version manager, such as `nvm`.\n\nCheck the output of `$ cat ~/Library/LaunchAgents/ie.hood.local-tld-service.plist` for the following:\n\n```\n<key>ProgramArguments</key>\n<array>\n    <string>should equal the output of `$ which node`</string>\n    <string>should equal the output of `$ echo $NODE_PATH` + /local-tld/bin/local-tld-service</string>\n</array>\n```\n\nIf these values aren't correct, you'll need to open `~/Library/LaunchAgents/ie.hood.local-tld-service.plist` in a text editor and update the file with the aforementioned values.\n\nIf things do not work, try:\n\n    $ launchctl unload ~/Library/LaunchAgents/ie.hood.local-tld-service.plist\n    $ launchctl load -Fw ~/Library/LaunchAgents/ie.hood.local-tld-service.plist\n\nIf things STILL don't work, try that (but don't tell Jan) ((I saw this! — Jan))\n\n    $ sudo $NODE_PATH/local-tld/bin/local-tld-troubleshoot\n\n**Vhosts**\n\nIf you find Hoodie interfering with your vhosts, here's a temporary workaround:\n\nTo get your vhosts back: `$ sudo ipfw flush`\n\nTo get local-tld back: `$ npm install -g local-tld`\n\nTo find out which state you're in: `$ sudo ipfw list`\nIf this includes something like \"00100 fwd 127.0.0.1,5999 tcp from any to me dst-port 80 in\", local-tld is currently running and might be blocking your vhosts.\n\n## Deploy to Nodejitsu\n\nYou need a Nodejitsu account and the `jitsu` tool installed.\n\nCreate a new hoodie app:\n\n    $ hoodie new myapp\n\nStart app locally:\n\n    $ cd myapp\n    $ hoodie start\n\nCreate a database:\n\n    $ jitsu database create couch myapp\n\nThis prints out the URL for your database, something like:\n\n    http://nodejitsudb123456789.iriscouch.com:5984\n\nGo to:\n\n    http://nodejitsudb123456789.iriscouch.com:5984/_utils\n\nIn the bottom right, click on \"Fix This\". Create a new user with the username `admin` and a password of your choice. Remember the password.\n\nCreate the Nodejitsu app.\n\n    $ jitsu apps create\n\nSet your database URL as an environment variable:\n\n    $ jitsu env set COUCH_URL http://nodejitsudb1234567890.iriscouch.com:5984\n    $ jitsu env set HOODIE_ADMIN_USER admin\n    $ jitsu env set HOODIE_ADMIN_PASS <yourpassword>\n\n\n`<yourpassword>` is the one you set up two steps ago.\n\nDeploy!\n\n    $ jitsu deploy\n\n(wait a minute)\n\nGo to: `http://myapp.jit.su`\n\nBoom.\n\n## Deploy on a regular Linux/UNIX box:\n\n[See deployment.md](deployment.md)\n\n<!--## Deploy dreamcode tl;dr\n\n    $ hoodie new myapp\n    $ cd myapp\n    $ hoodie start\n\n    $ hoodie remote add nodejitsu\n     - jitsu login\n     - jitsu database create couch myapp\n         - setup couchdb admin\n     - jitsu apps create\n     - jitsu env set COUCH_URL http://...\n     - jitsu env set COUCH_PASS <secret>\n\n    $ hoodie deploy\n     - jitsu deploy-->\n",
+  "readmeFilename": "README.md",
+  "gitHead": "1d7d6480fd70a292f69504d91a6667034d2932a7",
+  "description": "BackboneConf Contacts!",
+  "_id": "my-first-hoodie@3.0.0",
+  "_shasum": "2cff3f5f59e47bc458dd4eb54d68dd6ad52bf4a0",
+  "_from": "my-first-hoodie@3.0.0"
+}
