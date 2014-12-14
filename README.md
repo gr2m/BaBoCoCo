@@ -8,7 +8,7 @@ made Offline First with [Hoodie](http://hood.ie).
 ## Setup
 
 ```
-git clone git@github.com:gr2m/BaBoCoCo.git
+git clone --recursive git@github.com:gr2m/BaBoCoCo.git
 cd BaBoCoCo
 npm install
 hoodie start
